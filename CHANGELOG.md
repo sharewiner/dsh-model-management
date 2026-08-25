@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented in this file.
 
+## 0.2.1 - 2026-08-25
+
+### Fixed
+
+- Inlined browser-side model visibility and directory-compatibility helpers into the sole DSH client loader entry. This prevents the platform loader from requiring unmaterialized package subpath modules at startup.
+- Made compatibility probing fail open for malformed primitive directory values.
+- Made disposal restore only wrappers still owned by this plugin, preserving wrappers installed later by other plugins.
+
+### Tests
+
+- Added a VM smoke test that executes the published client loader with only platform seed modules and verifies filtering plus lifecycle cleanup.
+
 ## 0.2.0 - 2026-08-25
 
 ### Added

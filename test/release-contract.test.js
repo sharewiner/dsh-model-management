@@ -25,11 +25,19 @@ test('package, client loader, exports, and bundle patch use one identity', async
   const manifest = JSON.parse(await read('package.json'));
   const client = await read('lib/client.js');
   const patch = await read('cordis.patch.yml');
+  const readme = await read('README.md');
+  const readmeZh = await read('README.zh-CN.md');
+  const submission = await read('docs/marketplace-submission.md');
 
   assert.match(client, new RegExp(`id: '${expectedName.replace('/', '\\/')}'`));
-  assert.match(client, new RegExp(`${expectedName.replace('/', '\\/')}/model-visibility`));
-  assert.match(client, new RegExp(`${expectedName.replace('/', '\\/')}/model-directory-compat`));
+  assert.doesNotMatch(client, new RegExp(`require\\('${expectedName.replace('/', '\\/')}/`));
+  assert.match(client, /const visibility = \{/);
+  assert.match(client, /const directoryCompat = \{/);
   assert.equal(manifest.exports['./model-visibility'], './lib/model-visibility.js');
   assert.equal(manifest.exports['./model-directory-compat'], './lib/model-directory-compat.js');
   assert.match(patch, new RegExp(`name: '${expectedName.replace('/', '\\/')}'`));
+  const installRef = `${expectedName}@${manifest.version}`;
+  assert.equal(readme.includes(installRef), true);
+  assert.equal(readmeZh.includes(installRef), true);
+  assert.equal(submission.includes(`Exact version: \`${manifest.version}\``), true);
 });

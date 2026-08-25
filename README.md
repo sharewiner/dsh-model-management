@@ -16,7 +16,7 @@ A DSH Web profile plugin for managing OpenAI-compatible model providers, choosin
 
 ## Beta Status and Compatibility
 
-This project remains early access even though npm `0.2.0` uses stable SemVer as required by the DSH managed market. It was tested with DeepSeek Harness `0.1.1-rc.2` package APIs and DSH Desktop Web profiles current on 2026-08-25.
+This project remains early access even though npm `0.2.1` uses stable SemVer as required by the DSH managed market. It was tested with DeepSeek Harness `0.1.1-rc.2` package APIs and DSH Desktop Web profiles current on 2026-08-25.
 
 Model visibility synchronization uses a contained compatibility layer around DSH's client-side `modelDirectories` service because DSH does not currently expose a public model-directory filtering API. The layer probes the required directory contract before installation, caches visibility settings, restores every patched method when the plugin stops or updates, and leaves the native picker unchanged if the contract is incompatible. Verify the composer model picker and `/model` command after every DeepSeek Harness upgrade. Report compatibility issues in this repository's issue tracker.
 
@@ -32,7 +32,7 @@ Model visibility synchronization uses a contained compatibility layer around DSH
 Install the published package from the DSH plugin market, or add the exact npm version to the profile that Desktop starts:
 
 ```bash
-dsh plugin --profile web add @sharewiner/dsh-model-management@0.2.0
+dsh plugin --profile web add @sharewiner/dsh-model-management@0.2.1
 ```
 
 For local development, install this checkout with `pnpm add "file:/absolute/path/to/dsh-model-management"` from the target profile. Ensure `@sharewiner/dsh-model-management` appears in that profile's `dsh.profile.bundles`. The package bundle patch inserts the `model-management` Host entry. Restart DSH Desktop after installing or updating the package.

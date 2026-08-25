@@ -125,3 +125,33 @@ test('does not modify unsupported resolver or directory shapes', () => {
   assert.equal(resolver.directoryFor, originalDirectoryFor);
   assert.equal(warnings.length, 2);
 });
+
+test('fails open for primitive directory values', () => {
+  const warnings = [];
+  const resolver = createResolver([['session', 'unsupported']]);
+  const compat = createModelDirectoryCompat({
+    directories: resolver,
+    getControl: () => ({}),
+    onIncompatible: (reason) => warnings.push(reason),
+  });
+
+  assert.equal(compat.compatible, true);
+  assert.equal(resolver.directoryFor('session'), 'unsupported');
+  assert.equal(warnings.length, 1);
+  compat.dispose();
+});
+
+test('dispose does not overwrite wrappers installed later', () => {
+  const directory = createDirectory(result);
+  const resolver = createResolver([['session', directory]]);
+  const compat = createModelDirectoryCompat({ directories: resolver, getControl: () => ({}) });
+  const laterDirectoryFor = () => directory;
+  const laterLoad = async () => result;
+
+  resolver.directoryFor = laterDirectoryFor;
+  directory.load = laterLoad;
+  compat.dispose();
+
+  assert.equal(resolver.directoryFor, laterDirectoryFor);
+  assert.equal(directory.load, laterLoad);
+});

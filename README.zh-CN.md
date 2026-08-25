@@ -16,7 +16,7 @@
 
 ## Beta 状态与兼容性
 
-当前版本为 Beta，已基于 DeepSeek Harness `0.1.1-rc.2` 的包 API 与 2026-08-25 当天的 DSH Desktop Web Profile 完成验证。
+项目仍处于早期使用阶段，但 npm `0.2.0` 按 DSH 托管市场要求使用稳定 SemVer。该版本已基于 DeepSeek Harness `0.1.1-rc.2` 的包 API 与 2026-08-25 当天的 DSH Desktop Web Profile 完成验证。
 
 由于 DSH 暂未暴露公开的模型目录过滤 API，模型可见性同步会通过独立兼容层访问客户端 `modelDirectories` 服务。兼容层会在安装前探测目录契约、缓存可见性设置、在插件停止或更新时恢复所有被包装的方法；如契约不兼容，则保持原生模型选择器不变并输出一次诊断告警。每次升级 DeepSeek Harness 后，请重新验证输入框模型选择器和 `/model` 命令；兼容性问题请在本仓库 Issue 中反馈。
 
@@ -29,20 +29,13 @@
 
 ## 安装
 
-在 DSH Desktop 实际启动的 Profile 中，将本目录作为独立包安装：
+可通过 DSH 插件市场安装已发布版本，或将精确 npm 版本添加到 DSH Desktop 实际启动的 Profile：
 
 ```bash
-cd ~/.dsh/profiles/desktop
-pnpm add "file:/绝对路径/dsh-model-management"
+dsh plugin --profile web add @sharewiner/dsh-model-management@0.2.0
 ```
 
-确认该 Profile 的 `dsh.profile.bundles` 包含 `@dsh-local/model-management`。插件的 bundle patch 会插入 `model-management` Host 条目。安装或更新后必须完全重启 DSH Desktop。
-
-如果 Desktop 实际启动的是 `web` Profile，请将上面路径改为：
-
-```bash
-cd ~/.dsh/profiles/web
-```
+本地开发时，可在目标 Profile 中执行 `pnpm add "file:/绝对路径/dsh-model-management"` 安装当前源码。确认该 Profile 的 `dsh.profile.bundles` 包含 `@sharewiner/dsh-model-management`。插件的 bundle patch 会插入 `model-management` Host 条目。安装或更新后必须完全重启 DSH Desktop。
 
 ## 使用方法
 
@@ -70,8 +63,8 @@ Provider 标题栏支持展开与收起：点击标题、空白区域或箭头�
 
 ```bash
 cd ~/.dsh/profiles/desktop
-pnpm exec node --input-type=module -e "import('@dsh-local/model-management').then(() => console.log('host entry loaded'))"
-node --check node_modules/@dsh-local/model-management/lib/client.js
+pnpm exec node --input-type=module -e "import('@sharewiner/dsh-model-management').then(() => console.log('host entry loaded'))"
+node --check node_modules/@sharewiner/dsh-model-management/lib/client.js
 
 cd /绝对路径/dsh-model-management
 node --check lib/index.js

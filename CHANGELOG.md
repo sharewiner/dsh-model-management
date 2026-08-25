@@ -2,6 +2,20 @@
 
 All notable changes to this project are documented in this file.
 
+## 0.2.0 - 2026-08-25
+
+### Added
+
+- Unit coverage for OpenAI Responses profile selection, request construction, citation parsing, HTTP failures, aborted requests, and bounded provider errors.
+- GitHub Actions verification for tests, syntax checks, release contracts, and npm tarball contents.
+- Automated release-contract checks for stable SemVer, npm registry identity, lifecycle scripts, bundle evidence, exports, and client package identity.
+
+### Changed
+
+- Renamed the distributable package to `@sharewiner/dsh-model-management` for public npm and DSH market installation.
+- Removed test sources from the published npm tarball.
+- Extracted OpenAI Responses search behavior into a testable Host-independent module.
+
 ## 0.2.0-beta.2 - 2026-08-25
 
 ### Added

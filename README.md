@@ -1,5 +1,7 @@
 # DSH Model Management
 
+[中文文档](README.zh-CN.md)
+
 A DSH Web profile plugin for managing OpenAI-compatible model providers, choosing a default model, controlling model visibility, and optionally routing web search through the selected OpenAI Responses provider.
 
 ## Features

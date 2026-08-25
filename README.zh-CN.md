@@ -1,0 +1,82 @@
+# DSH 模型管理
+
+[English README](README.md)
+
+这是一个用于 DSH Web Profile 的模型管理插件，支持管理 OpenAI 兼容 Provider、选择默认模型、控制模型可见性，并可让联网搜索自动使用当前默认的 OpenAI Responses Provider。
+
+## 功能
+
+- 在设置页面增加“模型管理”分区。
+- 按 Provider 分组展示 DSH 当前已注册的全部模型。
+- 设置默认 Provider、模型以及支持的推理强度。
+- 隐藏单个模型，使其不再显示在输入框模型选择器和 `/model` 命令中。
+- 关闭整个 Provider，使该 Provider 的所有模型不再显示在输入框模型选择器和 `/model` 命令中。
+- 当前会话正在使用的模型会暂时保留显示；切换到其他模型后才会遵守隐藏规则，避免会话失去当前路由。
+- 注册 `model-management-openai-responses` 联网搜索 Provider，根据当前默认 OpenAI Responses 模型、服务地址和凭据引用执行搜索。
+
+## 运行要求
+
+- DSH Web Profile，且包含 `settings`、`credentials`、`agentDefaultModel`、`llm` 和 `web` 服务。
+- Node.js 22.19 或更高版本。
+- 与 `package.json` 中 peer dependencies 兼容的 DSH Host 包版本。
+- 已配置可用的 OpenAI 兼容模型服务。
+
+## 安装
+
+在 DSH Desktop 实际启动的 Profile 中，将本目录作为独立包安装：
+
+```bash
+cd ~/.dsh/profiles/desktop
+pnpm add "file:/绝对路径/dsh-model-management"
+```
+
+确认该 Profile 的 `dsh.profile.bundles` 包含 `@dsh-local/model-management`。插件的 bundle patch 会插入 `model-management` Host 条目。安装或更新后必须完全重启 DSH Desktop。
+
+如果 Desktop 实际启动的是 `web` Profile，请将上面路径改为：
+
+```bash
+cd ~/.dsh/profiles/web
+```
+
+## 使用方法
+
+打开 DSH 设置，选择 **模型管理**。
+
+1. 先在 DSH 原生的 **模型** 设置页配置 OpenAI 兼容 Provider、模型和 API 凭据。
+2. 在 **模型管理** 中选择默认模型。
+3. 点击模型的 **隐藏**，该模型会从输入框模型选择器与 `/model` 列表中移除。
+4. 点击 Provider 的 **关闭提供方**，该 Provider 下所有模型会从两个模型列表中移除。
+5. 点击 **显示** 或 **开启提供方** 可以恢复对应模型或 Provider。
+
+Provider 标题栏支持展开与收起：点击标题、空白区域或箭头均可切换；“开启提供方”或“关闭提供方”按钮只切换 Provider 状态，不会误触发展开或收起。
+
+## 联网搜索
+
+当当前默认模型属于已配置的 `openai-responses` Provider 时，插件会注册 `model-management-openai-responses`。将 DSH 的 web 服务配置为使用它后，联网搜索会自动跟随当前默认模型的 Provider、模型、服务地址与凭据引用。
+
+对应服务端需要支持：
+
+- `openai-responses`：`POST {baseURL}/responses`
+- `openai-completions`：由 `pi-ai` 转换的 OpenAI 兼容 Chat Completions 请求
+- 模型发现：`GET {baseURL}/models`
+
+## 验证
+
+```bash
+cd ~/.dsh/profiles/desktop
+pnpm exec node --input-type=module -e "import('@dsh-local/model-management').then(() => console.log('host entry loaded'))"
+node --check node_modules/@dsh-local/model-management/lib/client.js
+
+cd /绝对路径/dsh-model-management
+node --check lib/index.js
+node --check lib/client.js
+pnpm pack --pack-destination /tmp .
+```
+
+重启 DSH Web Profile 后，确认设置中出现 **模型管理** 分区。关闭 Provider 或隐藏模型后，分别检查输入框中的模型选择器和 `/model` 命令是否同步更新。
+
+## 安全说明
+
+插件只有在执行 OpenAI Responses 联网搜索时，才会通过 DSH 的凭据服务或启动环境读取 Provider 凭据。插件源码及模型管理设置不会保存 API Key、Token 或端点密钥。
+
+不要将本机 DSH settings、凭据文件或完整 Profile 目录提交到这个仓库。

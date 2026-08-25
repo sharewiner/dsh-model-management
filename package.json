@@ -2,7 +2,7 @@
   "name": "@dsh-local/model-management",
   "version": "0.1.0",
   "type": "module",
-  "description": "Independent DSH model provider and OpenAI Responses web-search management.",
+  "description": "DSH model management, synchronized model visibility, and OpenAI Responses web search.",
   "main": "./lib/index.js",
   "exports": {
     ".": "./lib/index.js",

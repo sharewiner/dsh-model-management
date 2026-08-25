@@ -1,0 +1,5 @@
+# Install this package directly into the DSH profile; it is not a child of
+# @dsh-local/provider-manager. The profile bundle loader mounts this entry.
+- insert:
+    - id: model-management
+      name: '@dsh-local/model-management'

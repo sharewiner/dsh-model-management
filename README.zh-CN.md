@@ -18,7 +18,7 @@
 
 当前版本为 Beta，已基于 DeepSeek Harness `0.1.1-rc.2` 的包 API 与 2026-08-25 当天的 DSH Desktop Web Profile 完成验证。
 
-由于 DSH 暂未暴露公开的模型目录过滤 API，模型可见性同步会包装客户端 `modelDirectories` 服务。每次升级 DeepSeek Harness 后，请重新验证输入框模型选择器和 `/model` 命令；兼容性问题请在本仓库 Issue 中反馈。
+由于 DSH 暂未暴露公开的模型目录过滤 API，模型可见性同步会通过独立兼容层访问客户端 `modelDirectories` 服务。兼容层会在安装前探测目录契约、缓存可见性设置、在插件停止或更新时恢复所有被包装的方法；如契约不兼容，则保持原生模型选择器不变并输出一次诊断告警。每次升级 DeepSeek Harness 后，请重新验证输入框模型选择器和 `/model` 命令；兼容性问题请在本仓库 Issue 中反馈。
 
 ## 运行要求
 

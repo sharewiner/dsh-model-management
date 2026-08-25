@@ -2,6 +2,19 @@
 
 All notable changes to this project are documented in this file.
 
+## 0.2.0-beta.2 - 2026-08-25
+
+### Added
+
+- A dedicated model-directory compatibility layer with capability detection before it wraps DSH client internals.
+- Cached model-visibility settings refreshed only at startup and after settings changes.
+- Lifecycle tests for existing and new session directories, current-model preservation, incompatible structures, idempotent installation, and cleanup.
+
+### Changed
+
+- Compatibility cleanup now restores the original `directoryFor()` and every wrapped directory `load()` method when the client plugin stops or updates.
+- Incompatible DSH client structures now leave native model selection untouched and emit one diagnostic warning instead of risking a broken model picker.
+
 ## 0.2.0-beta.1 - 2026-08-25
 
 ### Added

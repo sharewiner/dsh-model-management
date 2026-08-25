@@ -18,7 +18,7 @@ A DSH Web profile plugin for managing OpenAI-compatible model providers, choosin
 
 This is a beta release. It was tested with DeepSeek Harness `0.1.1-rc.2` package APIs and DSH Desktop Web profiles current on 2026-08-25.
 
-Model visibility synchronization wraps DSH's client-side `modelDirectories` service because DSH does not currently expose a public model-directory filtering API. Verify the composer model picker and `/model` command after every DeepSeek Harness upgrade. Report compatibility issues in this repository's issue tracker.
+Model visibility synchronization uses a contained compatibility layer around DSH's client-side `modelDirectories` service because DSH does not currently expose a public model-directory filtering API. The layer probes the required directory contract before installation, caches visibility settings, restores every patched method when the plugin stops or updates, and leaves the native picker unchanged if the contract is incompatible. Verify the composer model picker and `/model` command after every DeepSeek Harness upgrade. Report compatibility issues in this repository's issue tracker.
 
 ## Requirements
 

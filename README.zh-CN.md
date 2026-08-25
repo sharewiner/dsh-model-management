@@ -14,6 +14,12 @@
 - 当前会话正在使用的模型会暂时保留显示；切换到其他模型后才会遵守隐藏规则，避免会话失去当前路由。
 - 注册 `model-management-openai-responses` 联网搜索 Provider，根据当前默认 OpenAI Responses 模型、服务地址和凭据引用执行搜索。
 
+## Beta 状态与兼容性
+
+当前版本为 Beta，已基于 DeepSeek Harness `0.1.1-rc.2` 的包 API 与 2026-08-25 当天的 DSH Desktop Web Profile 完成验证。
+
+由于 DSH 暂未暴露公开的模型目录过滤 API，模型可见性同步会包装客户端 `modelDirectories` 服务。每次升级 DeepSeek Harness 后，请重新验证输入框模型选择器和 `/model` 命令；兼容性问题请在本仓库 Issue 中反馈。
+
 ## 运行要求
 
 - DSH Web Profile，且包含 `settings`、`credentials`、`agentDefaultModel`、`llm` 和 `web` 服务。

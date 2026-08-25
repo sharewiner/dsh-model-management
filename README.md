@@ -14,6 +14,12 @@ A DSH Web profile plugin for managing OpenAI-compatible model providers, choosin
 - Keeps the currently selected model visible until another model is selected, preventing an active session from losing its current route.
 - Registers `model-management-openai-responses`, a web-search provider that uses the active default OpenAI Responses model, base URL, and credential reference.
 
+## Beta Status and Compatibility
+
+This is a beta release. It was tested with DeepSeek Harness `0.1.1-rc.2` package APIs and DSH Desktop Web profiles current on 2026-08-25.
+
+Model visibility synchronization wraps DSH's client-side `modelDirectories` service because DSH does not currently expose a public model-directory filtering API. Verify the composer model picker and `/model` command after every DeepSeek Harness upgrade. Report compatibility issues in this repository's issue tracker.
+
 ## Requirements
 
 - A DSH Web profile with the `settings`, `credentials`, `agentDefaultModel`, `llm`, and `web` services.

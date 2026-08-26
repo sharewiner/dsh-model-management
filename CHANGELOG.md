@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented in this file.
 
+## 0.2.2 - 2026-08-26
+
+### Changed
+
+- Replaced provider enable/disable and model visibility text buttons with accessible switches that expose their current state through `aria-checked`.
+- Indented model rows beneath their provider to make the hierarchy explicit.
+- Improved off and disabled switch contrast in dark themes while keeping visible labels hidden from the compact control surface.
+- Reduced provider card corner radius to align with the surrounding DSH settings interface.
+
 ## 0.2.1 - 2026-08-25
 
 ### Fixed

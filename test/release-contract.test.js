@@ -33,6 +33,13 @@ test('package, client loader, exports, and bundle patch use one identity', async
   assert.doesNotMatch(client, new RegExp(`require\\('${expectedName.replace('/', '\\/')}/`));
   assert.match(client, /const visibility = \{/);
   assert.match(client, /const directoryCompat = \{/);
+  assert.match(client, /role: 'switch'/);
+  assert.match(client, /'aria-checked': providerEnabled/);
+  assert.match(client, /'aria-checked': !hidden/);
+  assert.match(client, /\.mm-models\{[^}]*padding-left:20px/);
+  assert.match(client, /\.mm-switch\[aria-checked=true\]\{[^}]*--dsw-alias-state-success-primary/);
+  assert.match(client, /\.mm-button\.primary\{[^}]*--dsw-alias-state-success-primary/);
+  assert.doesNotMatch(client, /--dsw-alias-button-primary-fill/);
   assert.equal(manifest.exports['./model-visibility'], './lib/model-visibility.js');
   assert.equal(manifest.exports['./model-directory-compat'], './lib/model-directory-compat.js');
   assert.match(patch, new RegExp(`name: '${expectedName.replace('/', '\\/')}'`));

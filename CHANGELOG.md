@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## 0.2.3 - 2026-08-26
+
+### Changed
+
+- Made provider headers taller than their child model rows while reducing overall vertical density.
+- Removed card-level vertical padding and gaps so every model row, including the last one, uses the same 58px height.
+
 ## 0.2.2 - 2026-08-26
 
 ### Changed

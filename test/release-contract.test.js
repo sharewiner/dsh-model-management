@@ -37,6 +37,13 @@ test('package, client loader, exports, and bundle patch use one identity', async
   assert.match(client, /'aria-checked': providerEnabled/);
   assert.match(client, /'aria-checked': !hidden/);
   assert.match(client, /\.mm-models\{[^}]*padding-left:20px/);
+  assert.match(client, /\.mm-row-card\{[^}]*padding:0 14px/);
+  assert.doesNotMatch(client, /\.mm-row-card\{[^}]*gap:/);
+  assert.match(client, /\.mm-row-head\{[^}]*height:56px;min-height:56px/);
+  assert.match(client, /\.mm-model\{[^}]*height:58px;min-height:58px;padding:0/);
+  assert.match(client, /\.mm-row-head\[aria-expanded=false\] \.mm-button\.mm-collapse::before/);
+  assert.doesNotMatch(client, /\.mm-button\.mm-collapse\[aria-expanded=false\]::before/);
+  assert.match(client, /className: 'mm-row-head'[^\n]*'aria-expanded': !collapsed/);
   assert.match(client, /\.mm-switch\[aria-checked=true\]\{[^}]*--dsw-alias-state-success-primary/);
   assert.match(client, /\.mm-button\.primary\{[^}]*--dsw-alias-state-success-primary/);
   assert.doesNotMatch(client, /--dsw-alias-button-primary-fill/);

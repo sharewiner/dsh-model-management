@@ -1,6 +1,6 @@
 {
   "name": "@sharewiner/dsh-model-management",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "type": "module",
   "description": "DSH model management, synchronized model visibility, and OpenAI Responses web search.",
   "license": "MIT",

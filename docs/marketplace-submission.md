@@ -3,7 +3,7 @@
 ## Package identity
 
 - Package: `@sharewiner/dsh-model-management`
-- Exact version: `0.2.2`
+- Exact version: `0.2.3`
 - Repository: `https://github.com/sharewiner/dsh-model-management`
 - License: MIT
 - Category: Models

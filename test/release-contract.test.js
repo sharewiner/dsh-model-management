@@ -46,6 +46,8 @@ test('package, client loader, exports, and bundle patch use one identity', async
   assert.match(client, /className: 'mm-row-head'[^\n]*'aria-expanded': !collapsed/);
   assert.match(client, /\.mm-switch\[aria-checked=true\]\{[^}]*--dsw-alias-state-success-primary/);
   assert.match(client, /\.mm-button\.primary\{[^}]*--dsw-alias-state-success-primary/);
+  assert.match(client, /current \? '默认模型' : '设为默认'/);
+  assert.doesNotMatch(client, /\.mm-state\{/);
   assert.doesNotMatch(client, /--dsw-alias-button-primary-fill/);
   assert.equal(manifest.exports['./model-visibility'], './lib/model-visibility.js');
   assert.equal(manifest.exports['./model-directory-compat'], './lib/model-directory-compat.js');
